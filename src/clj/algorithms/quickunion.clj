@@ -1,4 +1,4 @@
-(ns sketchpad.quickunion)
+(ns algorithms.quickunion)
 
 (def start (atom (vec (range 10))))
 (def size (atom (vec (take 10 (repeat 1)))))
@@ -15,7 +15,7 @@
 
 (defn union [x y]
   (let [rootx (root x)
-        rooty (root y)]     
+        rooty (root y)]
     (swap! start assoc rootx rooty)))
 
 (defn weighted-union [x y]

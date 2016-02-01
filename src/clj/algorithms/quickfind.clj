@@ -1,4 +1,4 @@
-(ns sketchpad.quickfind)
+(ns algorithms.quickfind)
 
 (def start (atom (vec (range 10))))
 
@@ -16,4 +16,3 @@
         (swap! start assoc index yid)))
 
     @start))
-

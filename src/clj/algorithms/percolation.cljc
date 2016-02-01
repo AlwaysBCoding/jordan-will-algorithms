@@ -1,4 +1,4 @@
-(ns sketchpad.percolation)
+(ns algorithms.percolation)
 
 (def traversals (atom 0))
 
@@ -77,5 +77,4 @@
       (recur (flip-square grid (rand-nth (closed-squares grid)))))))
 
 (defn simulations [trials grid-size]
-  [(double (/ (reduce (fn [memo i] (+ memo (simulation grid-size))) 0 (range trials)) trials))
-   @traversals])
+  (double (/ (reduce (fn [memo i] (+ memo (simulation grid-size))) 0 (range trials)) trials)))
