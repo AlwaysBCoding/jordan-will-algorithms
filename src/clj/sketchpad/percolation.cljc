@@ -23,7 +23,8 @@
     false))
 
 (defn neighbors [{:keys [roots] :as grid} x]
-  (let [n (int (Math/sqrt (count roots)))]
+  (let [n (int #?(:clj (Math/sqrt (count roots))
+                  :cljs (js/Math.sqrt (count roots))))]
     (vec (remove nil? [(if (> 0 (- x n)) nil (- x n)) ;; TOP
                        (if (<= (* n n) (+ x n)) nil (+ x n)) ;; BOTTOM
                        (if (= 0 (mod x n)) nil (- x 1)) ;; LEFT
@@ -50,7 +51,8 @@
   (nil? (nth roots x)))
 
 (defn percolates? [{:keys [roots] :as grid}]
-  (let [n (int (Math/sqrt (count roots)))
+  (let [n (int #?(:clj (Math/sqrt (count roots))
+                  :cljs (js/Math.sqrt (count roots))))
         top-row (take n roots)
         bottom-row (take-last n roots)]
 
@@ -59,7 +61,7 @@
                                   (map (fn [bottom-index]
                                          (connected? grid top-index bottom-index)) bottom-row)))
                            (flatten))]
-      
+
       (if (some true? connections) true false))))
 
 (defn closed-squares [{:keys [roots] :as grid}]
