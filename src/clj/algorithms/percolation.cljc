@@ -73,7 +73,8 @@
 (defn simulation [grid-size]
   (loop [grid (generate-grid grid-size)]
     (if (percolates? grid)
-      (double (/ (- (count (:roots grid)) (count (closed-squares grid))) (count (:roots grid))))
+      grid
+      #_(double (/ (- (count (:roots grid)) (count (closed-squares grid))) (count (:roots grid))))
       (recur (flip-square grid (rand-nth (closed-squares grid)))))))
 
 (defn simulations [trials grid-size]
