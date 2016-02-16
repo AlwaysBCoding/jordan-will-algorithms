@@ -34,6 +34,7 @@
 ;; App Component
 (defn app-component []
   [:div#cljs-app
+   [:h1 (:message @app-state)]
    [:div.simulation-actions
     [:button
      {:on-click (fn [event] (put! CX [[:run-simulation] {:grid-size 3}]))}

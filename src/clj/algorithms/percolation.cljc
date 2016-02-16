@@ -35,6 +35,9 @@
   (let [new-grid (assoc-in grid [:roots (root grid x)] y)]
     (update-in new-grid [:sizes y] #(+ % (get-in new-grid [:sizes x])))))
 
+(defn is-closed? [{:keys [roots] :as grid} x]
+  (nil? (nth roots x)))
+
 (defn flip-square [{:keys [roots] :as grid} x]
   (loop [grid (assoc-in grid [:roots x] x)
          neighbors-to-connect (remove #(is-closed? grid %) (neighbors grid x))]
@@ -46,9 +49,6 @@
         (recur
          new-grid
          new-neighbors)))))
-
-(defn is-closed? [{:keys [roots] :as grid} x]
-  (nil? (nth roots x)))
 
 (defn percolates? [{:keys [roots] :as grid}]
   (let [n (int #?(:clj (Math/sqrt (count roots))
